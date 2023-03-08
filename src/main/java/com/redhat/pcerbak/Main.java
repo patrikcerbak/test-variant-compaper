@@ -15,8 +15,9 @@ public class Main {
         Jobs jobs = new Jobs(options.getJobsPath());
 
         if(options.getOperation() == Options.Operations.List) {
+            jobs.printJobs();
+        } else if(options.getOperation() == Options.Operations.Enumerate) {
             jobs.printVariants();
-            //jobs.printJobs();
         } else if(options.getOperation() == Options.Operations.Compare) {
             Integer[] jobsToCompare = jobs.getJobIndexes(ParseQueryString.parseToList(options.getQueryString()));
 

@@ -45,6 +45,7 @@ public class Options {
 
     public enum Operations {
         List,
+        Enumerate,
         Compare
     }
 
