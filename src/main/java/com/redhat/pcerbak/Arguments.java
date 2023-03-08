@@ -1,4 +1,4 @@
-package main.java.com.redhat.pcerbak;
+package com.redhat.pcerbak;
 
 public class Arguments {
     public static Options parse(String[] arguments) {
