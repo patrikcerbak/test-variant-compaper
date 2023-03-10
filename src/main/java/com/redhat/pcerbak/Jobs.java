@@ -42,7 +42,10 @@ public class Jobs {
         for(ArrayList<String> variantList : variantsList) {
             System.out.printf("%d) ", variantsList.indexOf(variantList) + 1);
             for(String variant : variantList) {
-                System.out.printf("%s, ", variant);
+                if(variantList.indexOf(variant) != 0) {
+                    System.out.print(", ");
+                }
+                System.out.printf("%s", variant);
             }
             System.out.print("\n");
         }
