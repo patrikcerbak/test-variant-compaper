@@ -6,7 +6,7 @@ public class Arguments {
 
         if(arguments.length >= 2) {
             for (int i = 0; i < arguments.length; i++) {
-                switch (arguments[i]) {
+                switch (arguments[i].toLowerCase()) {
                     case "-l", "--list" -> options.setOperation(Options.Operations.List);
                     case "-e", "--enumerate" -> options.setOperation(Options.Operations.Enumerate);
                     case "-c", "--compare" -> options.setOperation(Options.Operations.Compare);
@@ -22,6 +22,11 @@ public class Arguments {
                             options.setQueryString(arguments[i + 1]);
                         } else {
                             throw new RuntimeException("Expected query string after -q.");
+                        }
+                    }
+                    case "--skip-failed=true", "--skip-failed=false" -> {
+                        if(arguments[i].split("=")[1].equals("false")) {
+                            options.setSkipFailed(false);
                         }
                     }
                 }
