@@ -24,23 +24,25 @@ public class ParseQueryString {
     }
 
     static boolean checkJobWithQuery(String[] jobArray, String queryString) {
-        ArrayList<String[]> queryList = parseToList(queryString);
-        for(int i = 0; i < queryList.size(); i++) {
-            String[] qArr = queryList.get(i);
-            if(qArr.length == 1) {
-                if(!qArr[0].equals("*") && !qArr[0].equals(jobArray[i])) {
-                    return false;
-                }
-            } else {
-                boolean doesContain = false;
-                for(String str : qArr) {
-                    if (str.equals(jobArray[i])) {
-                        doesContain = true;
-                        break;
+        if(!queryString.equals("")) {
+            ArrayList<String[]> queryList = parseToList(queryString);
+            for (int i = 0; i < queryList.size(); i++) {
+                String[] qArr = queryList.get(i);
+                if (qArr.length == 1) {
+                    if (!qArr[0].equals("*") && !qArr[0].equals(jobArray[i])) {
+                        return false;
                     }
-                }
-                if(!doesContain) {
-                    return false;
+                } else {
+                    boolean doesContain = false;
+                    for (String str : qArr) {
+                        if (str.equals(jobArray[i])) {
+                            doesContain = true;
+                            break;
+                        }
+                    }
+                    if (!doesContain) {
+                        return false;
+                    }
                 }
             }
         }
