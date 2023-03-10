@@ -14,7 +14,7 @@ public class Jobs {
                 .toArray(File[]::new);
 
         this.listWithJobVariants = new ArrayList<>();
-        for (File job : jobsInDir) {
+        for(File job : jobsInDir) {
             String dirName = job.getName();
             listWithJobVariants.add(dirName.split("[.-]"));
         }
@@ -26,12 +26,41 @@ public class Jobs {
         }
     }
 
-    public Integer[] getJobIndexes(ArrayList<String[]> queryList) {
+    private ArrayList<ArrayList<String>> getVariantsList(String queryString) {
+        ArrayList<ArrayList<String>> variantsList = new ArrayList<>();
+        for(int i = 0; i < jobsInDir[0].getName().split("[.-]").length; i++) {
+            ArrayList<String> jArr = new ArrayList<>();
+            for(File job : jobsInDir) {
+                String[] jobArr = job.getName().split("[.-]");
+                if(ParseQueryString.checkJobWithQuery(jobArr, queryString) && !jArr.contains(jobArr[i])) {
+                    jArr.add(jobArr[i]);
+                }
+            }
+            variantsList.add(jArr);
+        }
+        return variantsList;
+    }
+
+    public void printVariants(String queryString) {
+        ArrayList<ArrayList<String>> variantsList = getVariantsList(queryString);
+        for(int i = 0; i < variantsList.size(); i++) {
+            System.out.printf("%d) ", i + 1);
+            for(String variant : variantsList.get(i)) {
+                if(variantsList.get(i).indexOf(variant) != 0) {
+                    System.out.print(", ");
+                }
+                System.out.printf("%s", variant);
+            }
+            System.out.print("\n");
+        }
+    }
+
+    public Integer[] getJobIndexes(String queryString) {
         Integer[] listOfJobIndexes = new Integer[listWithJobVariants.size()];
         Arrays.fill(listOfJobIndexes, 1);
 
         for(String[] job : listWithJobVariants) {
-            if(!ParseQueryString.checkJobWithQuery(job, queryList)) {
+            if(!ParseQueryString.checkJobWithQuery(job, queryString)) {
                 listOfJobIndexes[listWithJobVariants.indexOf(job)] = 0;
             }
         }

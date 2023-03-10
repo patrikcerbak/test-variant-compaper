@@ -3,7 +3,7 @@ package com.redhat.pcerbak;
 import java.util.ArrayList;
 
 public class ParseQueryString {
-    static ArrayList<String[]> parseToList(String queryString) {
+    private static ArrayList<String[]> parseToList(String queryString) {
         String[] tempArray = queryString.split(" ");
         ArrayList<String[]> queryList = new ArrayList<>();
 
@@ -23,23 +23,26 @@ public class ParseQueryString {
         return queryList;
     }
 
-    static boolean checkJobWithQuery(String[] jobArray, ArrayList<String[]> queryList) {
-        for(int i = 0; i < queryList.size(); i++) {
-            String[] qArr = queryList.get(i);
-            if(qArr.length == 1) {
-                if(!qArr[0].equals("*") && !qArr[0].equals(jobArray[i])) {
-                    return false;
-                }
-            } else {
-                boolean doesContain = false;
-                for(String str : qArr) {
-                    if (str.equals(jobArray[i])) {
-                        doesContain = true;
-                        break;
+    static boolean checkJobWithQuery(String[] jobArray, String queryString) {
+        if(!queryString.equals("")) {
+            ArrayList<String[]> queryList = parseToList(queryString);
+            for (int i = 0; i < queryList.size(); i++) {
+                String[] qArr = queryList.get(i);
+                if (qArr.length == 1) {
+                    if (!qArr[0].equals("*") && !qArr[0].equals(jobArray[i])) {
+                        return false;
                     }
-                }
-                if(!doesContain) {
-                    return false;
+                } else {
+                    boolean doesContain = false;
+                    for (String str : qArr) {
+                        if (str.equals(jobArray[i])) {
+                            doesContain = true;
+                            break;
+                        }
+                    }
+                    if (!doesContain) {
+                        return false;
+                    }
                 }
             }
         }

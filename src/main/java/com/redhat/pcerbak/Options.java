@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Options {
 
     public Options() {
-        this.listOfCompares = new ArrayList<>();
+        this.queryString = "";
+        this.skipFailed = true;
     }
     public Operations getOperation() {
         return operation;
@@ -23,18 +24,6 @@ public class Options {
         this.jobsPath = jobsPath;
     }
 
-    public ArrayList<Integer> getListOfCompares() {
-        return listOfCompares;
-    }
-
-    public void setListOfCompares(ArrayList<Integer> listOfCompares) {
-        this.listOfCompares = listOfCompares;
-    }
-
-    public void addToListOfCompares(Integer compareNumber) {
-        this.listOfCompares.add(compareNumber);
-    }
-
     public String getQueryString() {
         return queryString;
     }
@@ -43,13 +32,22 @@ public class Options {
         this.queryString = queryString;
     }
 
+    public boolean isSkipFailed() {
+        return skipFailed;
+    }
+
+    public void setSkipFailed(boolean skipFailed) {
+        this.skipFailed = skipFailed;
+    }
+
     public enum Operations {
         List,
+        Enumerate,
         Compare
     }
 
     private String queryString;
     private Operations operation;
     private String jobsPath;
-    private ArrayList<Integer> listOfCompares;
+    private boolean skipFailed;
 }
