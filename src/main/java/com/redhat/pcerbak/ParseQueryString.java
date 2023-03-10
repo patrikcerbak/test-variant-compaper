@@ -3,7 +3,7 @@ package com.redhat.pcerbak;
 import java.util.ArrayList;
 
 public class ParseQueryString {
-    static ArrayList<String[]> parseToList(String queryString) {
+    private static ArrayList<String[]> parseToList(String queryString) {
         String[] tempArray = queryString.split(" ");
         ArrayList<String[]> queryList = new ArrayList<>();
 
@@ -23,7 +23,8 @@ public class ParseQueryString {
         return queryList;
     }
 
-    static boolean checkJobWithQuery(String[] jobArray, ArrayList<String[]> queryList) {
+    static boolean checkJobWithQuery(String[] jobArray, String queryString) {
+        ArrayList<String[]> queryList = parseToList(queryString);
         for(int i = 0; i < queryList.size(); i++) {
             String[] qArr = queryList.get(i);
             if(qArr.length == 1) {

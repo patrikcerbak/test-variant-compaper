@@ -51,12 +51,12 @@ public class Jobs {
         }
     }
 
-    public Integer[] getJobIndexes(ArrayList<String[]> queryList) {
+    public Integer[] getJobIndexes(String queryString) {
         Integer[] listOfJobIndexes = new Integer[listWithJobVariants.size()];
         Arrays.fill(listOfJobIndexes, 1);
 
         for(String[] job : listWithJobVariants) {
-            if(!ParseQueryString.checkJobWithQuery(job, queryList)) {
+            if(!ParseQueryString.checkJobWithQuery(job, queryString)) {
                 listOfJobIndexes[listWithJobVariants.indexOf(job)] = 0;
             }
         }

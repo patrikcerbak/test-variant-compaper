@@ -19,7 +19,7 @@ public class Main {
         } else if(options.getOperation() == Options.Operations.Enumerate) {
             jobs.printVariants();
         } else if(options.getOperation() == Options.Operations.Compare) {
-            Integer[] jobsToCompare = jobs.getJobIndexes(ParseQueryString.parseToList(options.getQueryString()));
+            Integer[] jobsToCompare = jobs.getJobIndexes(options.getQueryString());
 
             ArrayList<String> commandArguments = new ArrayList<>();
             for(int i = 0; i < jobs.getJobsInDir().length; i++) {
