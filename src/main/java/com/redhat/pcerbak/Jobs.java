@@ -18,18 +18,6 @@ public class Jobs {
             String dirName = job.getName();
             listWithJobVariants.add(dirName.split("[.-]"));
         }
-
-        this.variantsList = new ArrayList<>();
-        for(int i = 0; i < jobsInDir.length; i++) {
-            ArrayList<String> jArr = new ArrayList<>();
-            for(File job : jobsInDir) {
-                String varStr = job.getName().split("[.-]")[i];
-                if(!jArr.contains(varStr)) {
-                    jArr.add(varStr);
-                }
-            }
-            variantsList.add(jArr);
-        }
     }
 
     public void printJobs() {
@@ -38,11 +26,27 @@ public class Jobs {
         }
     }
 
-    public void printVariants() {
-        for(ArrayList<String> variantList : variantsList) {
-            System.out.printf("%d) ", variantsList.indexOf(variantList) + 1);
-            for(String variant : variantList) {
-                if(variantList.indexOf(variant) != 0) {
+    private ArrayList<ArrayList<String>> getVariantsList(String queryString) {
+        ArrayList<ArrayList<String>> variantsList = new ArrayList<>();
+        for(int i = 0; i < jobsInDir[0].getName().split("[.-]").length; i++) {
+            ArrayList<String> jArr = new ArrayList<>();
+            for(File job : jobsInDir) {
+                String[] jobArr = job.getName().split("[.-]");
+                if(ParseQueryString.checkJobWithQuery(jobArr, queryString) && !jArr.contains(jobArr[i])) {
+                    jArr.add(jobArr[i]);
+                }
+            }
+            variantsList.add(jArr);
+        }
+        return variantsList;
+    }
+
+    public void printVariants(String queryString) {
+        ArrayList<ArrayList<String>> variantsList = getVariantsList(queryString);
+        for(int i = 0; i < variantsList.size(); i++) {
+            System.out.printf("%d) ", i + 1);
+            for(String variant : variantsList.get(i)) {
+                if(variantsList.get(i).indexOf(variant) != 0) {
                     System.out.print(", ");
                 }
                 System.out.printf("%s", variant);
@@ -72,11 +76,6 @@ public class Jobs {
         return listWithJobVariants;
     }
 
-    public ArrayList<ArrayList<String>> getVariantsList() {
-        return variantsList;
-    }
-
     private final File[] jobsInDir;
     private final ArrayList<String[]> listWithJobVariants;
-    public ArrayList<ArrayList<String>> variantsList;
 }

@@ -2,10 +2,7 @@ package com.redhat.pcerbak;
 
 import hudson.plugins.report.jck.main.CompareBuilds;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -17,7 +14,7 @@ public class Main {
         if(options.getOperation() == Options.Operations.List) {
             jobs.printJobs();
         } else if(options.getOperation() == Options.Operations.Enumerate) {
-            jobs.printVariants();
+            jobs.printVariants(options.getQueryString());
         } else if(options.getOperation() == Options.Operations.Compare) {
             Integer[] jobsToCompare = jobs.getJobIndexes(options.getQueryString());
 
