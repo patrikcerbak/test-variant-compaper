@@ -21,7 +21,11 @@ public class Main {
             ArrayList<String> commandArguments = new ArrayList<>();
             for(int i = 0; i < jobs.getJobsInDir().length; i++) {
                 if(jobsToCompare[i] == 1) {
-                    commandArguments.add(Builds.getLastBuild(jobs.getJobsInDir()[i]).getAbsolutePath());
+                    if(options.isSkipFailed()) {
+                        commandArguments.add(Builds.getLastSuccessfulBuild(jobs.getJobsInDir()[i]).getAbsolutePath());
+                    } else {
+                        commandArguments.add(Builds.getLastBuild(jobs.getJobsInDir()[i]).getAbsolutePath());
+                    }
                 }
             }
             commandArguments.add("--view=diff-list");
