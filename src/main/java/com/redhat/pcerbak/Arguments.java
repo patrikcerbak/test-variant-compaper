@@ -29,6 +29,13 @@ public class Arguments {
                             options.setSkipFailed(false);
                         }
                     }
+                    case "-n", "--nvr" -> {
+                        if(i + 1 <= arguments.length) {
+                            options.setNvr(arguments[i + 1]);
+                        } else {
+                            throw new RuntimeException("Expected NVR after -n.");
+                        }
+                    }
                 }
             }
         } else {

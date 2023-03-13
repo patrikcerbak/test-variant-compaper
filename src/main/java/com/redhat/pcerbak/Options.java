@@ -38,6 +38,14 @@ public class Options {
         this.skipFailed = skipFailed;
     }
 
+    public String getNvr() {
+        return nvr;
+    }
+
+    public void setNvr(String nvr) {
+        this.nvr = nvr;
+    }
+
     public enum Operations {
         List,
         Enumerate,
@@ -48,4 +56,5 @@ public class Options {
     private Operations operation;
     private String jobsPath;
     private boolean skipFailed;
+    private String nvr;
 }
