@@ -29,6 +29,18 @@ public class Arguments {
                             options.setSkipFailed(false);
                         }
                     }
+                    case "-n", "--nvr" -> {
+                        if(i + 1 <= arguments.length) {
+                            options.setNvrQuery(arguments[i + 1]);
+                        } else {
+                            throw new RuntimeException("Expected NVR after -n.");
+                        }
+                    }
+                    case "--show-nvrs=false", "--show-nvrs=true" -> {
+                        if(arguments[i].split("=")[1].equals("true")) {
+                            options.setShowNvrs(true);
+                        }
+                    }
                 }
             }
         } else {

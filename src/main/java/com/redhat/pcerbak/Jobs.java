@@ -20,9 +20,15 @@ public class Jobs {
         }
     }
 
-    public void printJobs() {
+    public void printJobs(Options options) {
         for(int i = 0; i < jobsInDir.length; i++) {
             System.out.printf("%d) %s\n", i, jobsInDir[i].getName());
+            if(options.isShowNvrs()) {
+                for(String nvr : Builds.getJobNvrs(jobsInDir[i])) {
+                    System.out.print(nvr + ", ");
+                }
+                System.out.print("\n\n");
+            }
         }
     }
 
