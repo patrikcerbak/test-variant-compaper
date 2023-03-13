@@ -31,9 +31,14 @@ public class Arguments {
                     }
                     case "-n", "--nvr" -> {
                         if(i + 1 <= arguments.length) {
-                            options.setNvr(arguments[i + 1]);
+                            options.setNvrQuery(arguments[i + 1]);
                         } else {
                             throw new RuntimeException("Expected NVR after -n.");
+                        }
+                    }
+                    case "--show-nvrs=false", "--show-nvrs=true" -> {
+                        if(arguments[i].split("=")[1].equals("true")) {
+                            options.setShowNvrs(true);
                         }
                     }
                 }

@@ -4,6 +4,7 @@ public class Options {
 
     public Options() {
         this.queryString = "";
+        this.nvrQuery = "";
         this.skipFailed = true;
     }
     public Operations getOperation() {
@@ -38,12 +39,20 @@ public class Options {
         this.skipFailed = skipFailed;
     }
 
-    public String getNvr() {
-        return nvr;
+    public String getNvrQuery() {
+        return nvrQuery;
     }
 
-    public void setNvr(String nvr) {
-        this.nvr = nvr;
+    public void setNvrQuery(String nvr) {
+        this.nvrQuery = nvr;
+    }
+
+    public boolean isShowNvrs() {
+        return showNvrs;
+    }
+
+    public void setShowNvrs(boolean showNvrs) {
+        this.showNvrs = showNvrs;
     }
 
     public enum Operations {
@@ -56,5 +65,6 @@ public class Options {
     private Operations operation;
     private String jobsPath;
     private boolean skipFailed;
-    private String nvr;
+    private String nvrQuery;
+    private boolean showNvrs;
 }
