@@ -1,7 +1,5 @@
 package com.redhat.pcerbak;
 
-import java.util.ArrayList;
-
 public class Options {
 
     public Options() {

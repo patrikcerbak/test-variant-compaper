@@ -71,11 +71,6 @@ public class Jobs {
     public File[] getJobsInDir() {
         return jobsInDir;
     }
-
-    public ArrayList<String[]> getListWithJobVariants() {
-        return listWithJobVariants;
-    }
-
     private final File[] jobsInDir;
     private final ArrayList<String[]> listWithJobVariants;
 }
