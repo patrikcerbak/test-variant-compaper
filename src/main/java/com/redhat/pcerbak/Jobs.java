@@ -68,6 +68,16 @@ public class Jobs {
         return listOfJobIndexes;
     }
 
+    public void printJobsNvrs() {
+        for(File job : jobsInDir) {
+            System.out.print(job.getName() + ":\n    ");
+            for(String nvr : Builds.getJobNvrs(job)) {
+                System.out.print(nvr + ", ");
+            }
+            System.out.print("\n");
+        }
+    }
+
     public File[] getJobsInDir() {
         return jobsInDir;
     }
